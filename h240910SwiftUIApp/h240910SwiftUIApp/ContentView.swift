@@ -13,19 +13,24 @@ struct ContentView: View {
     //创建了各种活动名称的数组
     var activities = ["Archery", "Baseball", "Basketball", "Bowling", "Boxing", "Cricket", "Curling", "Fencing", "Golf", "Hiking", "Lacrosse", "Rugby", "Squash"]
     
+    //创建颜色数组
+    var colors: [Color] = [.blue, .cyan, .gray, .green, .indigo, .mint, .orange, .pink, .purple, .red]
+    
     //选择射箭作为默认值
-    @State var selected = "Archery"
+    @State private var selected = "Archery"
     
     var body: some View {
         
         VStack{ // 垂直布局
-            
+ 
             Text("Why not try...")
                 .font(.largeTitle.bold())
+                        
+            Spacer() //自动扩展的灵活空间
             
             VStack{ // 垂直布局
                 Circle()
-                    .fill(.blue)
+                    .fill(colors.randomElement() ?? .blue) //默认值为蓝色
                     .padding()
                     .overlay( // SF Symbols
                         Image(systemName:"figure.\(selected.lowercased())") // 小写活动名称
@@ -37,9 +42,12 @@ struct ContentView: View {
                     .font(.title)
             }
             
+            Spacer() //自动扩展的灵活空间
+            
             Button("Try again") {
-                //change activity
-                selected = activities.randomElement() ?? "Archery"
+                withAnimation(.easeInOut(duration: 1)) { //使用淡出动画
+                    selected = activities.randomElement() ?? "Archery"
+                }
             }
             .buttonStyle(.borderedProminent)
         }
