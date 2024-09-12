@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-@main
+@main //应用程序的入口
 struct h240910SwiftUIAppApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
