@@ -19,6 +19,8 @@ struct ContentView: View {
     //选择射箭作为默认值
     @State private var selected = "Archery"
     
+    @State private var id = 1
+    
     var body: some View {
         
         VStack{ // 垂直布局
@@ -41,12 +43,15 @@ struct ContentView: View {
                 Text("\(selected)!")
                     .font(.title)
             }
+            .transition(.slide) // 控制添加和删除过渡的发生方式
+            .id(id) // 将该标识符附加到整个 VStack
             
             Spacer() //自动扩展的灵活空间
             
             Button("Try again") {
                 withAnimation(.easeInOut(duration: 1)) { //使用淡出动画
                     selected = activities.randomElement() ?? "Archery"
+                    id += 1
                 }
             }
             .buttonStyle(.borderedProminent)
