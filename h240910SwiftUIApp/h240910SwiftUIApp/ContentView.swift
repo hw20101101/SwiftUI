@@ -10,14 +10,13 @@ import SwiftData
 
 struct ContentView: View {
     
+    //创建了各种活动名称的数组
+    var activities = ["Archery", "Baseball", "Basketball", "Bowling", "Boxing", "Cricket", "Curling", "Fencing", "Golf", "Hiking", "Lacrosse", "Rugby", "Squash"]
+    
+    //选择射箭作为默认值
+    @State var selected = "Archery"
+    
     var body: some View {
-//        VStack {
-//            Image(systemName: "globe")
-//                .imageScale(.large)
-//                .foregroundColor(.accentColor)
-//            Text("hello world")
-//        }
-//        .padding()
         
         VStack{ // 垂直布局
             
@@ -28,15 +27,21 @@ struct ContentView: View {
                 Circle()
                     .fill(.blue)
                     .padding()
-                    .overlay(
-                        Image(systemName:"figure.archery")
+                    .overlay( // SF Symbols
+                        Image(systemName:"figure.\(selected.lowercased())") // 小写活动名称
                             .font(.system(size: 100))
                             .foregroundColor(.white)
                     )
                 
-                Text("Archery !")
+                Text("\(selected)!")
                     .font(.title)
             }
+            
+            Button("Try again") {
+                //change activity
+                selected = activities.randomElement() ?? "Archery"
+            }
+            .buttonStyle(.borderedProminent)
         }
     }
     
