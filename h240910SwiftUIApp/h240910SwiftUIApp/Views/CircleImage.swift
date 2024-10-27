@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CircleImage: View {
     var body: some View {
-        Image("turtlerock")
+        Image("twinlake")
             .clipShape(Circle()) //将图片裁剪为圆形
             .overlay {
                 Circle().stroke(.white, lineWidth: 6) //设置圆形描边
